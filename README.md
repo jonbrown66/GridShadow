@@ -1,5 +1,7 @@
 <img width="2547" height="1515" alt="image" src="https://github.com/user-attachments/assets/c54f0433-8695-42bb-b4bd-098cd912aeb3" />
+
 [1]:https://grid-shadow.vercel.app/
+
 # GridShadow
 
 GridShadow is a layout-first mockup studio that helps you craft screenshot compositions, packshots, and layered moodboards in seconds. It focuses on two workflows:
