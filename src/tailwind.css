@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .all-\[unset\] {
+    all: unset;
+  }
+
+  .glass {
+    @apply bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-[0_4px_24px_-1px_rgba(0, 0, 0, 0.1)] dark:shadow-[0_4px_24px_-1px_rgba(0, 0, 0, 0.5)];
+  }
+
+  .glass-dark {
+    @apply bg-white/80 dark:bg-black/80 backdrop-blur-2xl border border-black/5 dark:border-white/5 shadow-[0_8px_32px_0_rgba(0, 0, 0, 0.1)] dark:shadow-[0_8px_32px_0_rgba(0, 0, 0, 0.8)];
+  }
+
+  .technical-grid {
+    background-image:
+      linear-gradient(to right, rgba(150, 150, 150, 0.15) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(150, 150, 150, 0.15) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .browser-shell {
+    @apply rounded-sm border border-black/10 dark:border-white/10 bg-white dark:bg-black overflow-hidden shadow-2xl;
+  }
+
+  .browser-header {
+    @apply h-10 border-b border-black/10 dark:border-white/10 bg-white dark:bg-black flex items-center px-4 gap-1.5;
+  }
+
+  .browser-dot {
+    @apply w-2.5 h-2.5 rounded-none border border-black/20 dark:border-white/20;
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-black/20 dark:bg-white/20 rounded-none hover:bg-black/40 dark:hover:bg-white/40 transition-colors;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s var(--animation-delay, 0s) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s var(--animation-delay, 0s) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 96%;
+    --foreground: 0 0% 4%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 40%;
+    --border: 0 0% 86%;
+    --input: 0 0% 86%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --radius: 0.125rem;
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 100%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --primary: 81 100% 49%;
+    --primary-foreground: 0 0% 0%;
+    --radius: 0.125rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+}

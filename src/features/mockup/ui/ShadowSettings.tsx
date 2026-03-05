@@ -30,30 +30,32 @@ export const ShadowSettings: React.FC<ShadowSettingsProps> = ({
 }) => {
   return (
     <section>
-      <h2 className="mb-4 font-medium text-gray-500 text-xs tracking-wide uppercase">
-        SHADOW
-      </h2>
-      <Card className="border border-gray-200">
+      <div className="flex items-center gap-2 mb-4">
+        <div className="w-1.5 h-1.5 bg-primary"></div>
+        <h2 className="font-bold text-foreground text-[10px] tracking-[0.2em] uppercase font-mono">
+          Depth & Shadow
+        </h2>
+      </div>
+      <Card className="border border-black/10 dark:border-white/10 bg-white dark:bg-black/40 rounded-sm">
         <CardContent className="p-4 space-y-4">
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-3 gap-2">
             {shadowOptions.map((option, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center gap-2 cursor-pointer"
+                className="flex flex-col items-center gap-2 cursor-pointer group"
                 onClick={() => setSelectedShadow(index)}
               >
                 <div
-                  className={`w-full h-16 rounded-lg border-2 overflow-hidden ${
-                    selectedShadow === index ? "border-purple-500" : "border-gray-200"
-                  }`}
+                  className={`w-full h-16 rounded-sm border overflow-hidden transition-colors ${selectedShadow === index ? "border-primary" : "border-black/10 dark:border-white/10 group-hover:border-black/30 dark:hover:border-white/30"
+                    }`}
                 >
-                  <div className="w-full h-full bg-gray-100 rounded-lg overflow-hidden">
+                  <div className="w-full h-full bg-black/5 dark:bg-white/10 rounded-none overflow-hidden relative">
                     <div
-                      className={`h-full w-3/4 mx-auto mt-2 bg-white rounded-lg ${option.previewClass}`}
+                      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-3/4 bg-black/10 dark:bg-white/10 border border-black/20 dark:border-white/20 transition-all ${option.previewClass}`}
                     />
                   </div>
                 </div>
-                <div className="text-xs text-gray-600 text-center">
+                <div className={`text-[10px] uppercase font-mono tracking-wider ${selectedShadow === index ? "text-primary font-bold" : "text-muted-foreground"}`}>
                   {option.label}
                 </div>
               </div>
@@ -61,21 +63,22 @@ export const ShadowSettings: React.FC<ShadowSettingsProps> = ({
           </div>
 
           <Card
-            className="cursor-pointer border-2 border-gray-200 hover:border-purple-300 transition-colors"
+            className="cursor-pointer border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 hover:border-primary hover:bg-black/10 dark:hover:bg-white/10 transition-colors rounded-sm group"
             onClick={() => setShowShadowColorPicker(true)}
           >
-            <CardContent className="p-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg border-2 border-gray-200 overflow-hidden">
+            <CardContent className="p-3 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-sm border-2 border-black/10 dark:border-white/10 overflow-hidden relative group-hover:border-primary/50 transition-colors">
+                <div className="absolute inset-0 technical-grid opacity-30 mix-blend-overlay"></div>
                 <div
-                  className="w-full h-full rounded-md"
+                  className="w-full h-full"
                   style={{ backgroundColor: `${shadowColor}${Math.round((shadowOpacity / 100) * 255).toString(16).padStart(2, "0")}` }}
                 />
               </div>
-              <div className="flex-1">
-                <div className="font-medium text-gray-700 text-sm">Color</div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-gray-500">{shadowColor}</span>
-                  <span className="text-xs text-gray-500">
+              <div className="flex-1 font-mono">
+                <div className="font-bold text-foreground text-xs uppercase tracking-wider group-hover:text-primary transition-colors">Color / Opacity</div>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-[10px] text-muted-foreground border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 py-0.5 px-1.5 rounded-sm">{shadowColor}</span>
+                  <span className="text-[10px] text-muted-foreground font-bold border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 py-0.5 px-1.5 rounded-sm">
                     {shadowOpacity}%
                   </span>
                 </div>
@@ -83,28 +86,25 @@ export const ShadowSettings: React.FC<ShadowSettingsProps> = ({
             </CardContent>
           </Card>
 
-          <Card className="border border-gray-200">
+          <Card className="border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 rounded-sm">
             <CardContent className="p-4">
-              <div className="font-medium text-gray-700 text-sm mb-3">
-                Position
+              <div className="font-bold text-foreground text-xs uppercase tracking-wider font-mono mb-3">
+                Light Source Offset
               </div>
-              <div className="grid grid-cols-3 gap-1">
+              <div className="grid grid-cols-3 gap-1 max-w-[120px] mx-auto">
                 {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((pos) => (
                   <button
                     key={pos}
                     onClick={() => setShadowPosition(pos)}
-                    className={`w-7 h-7 rounded border flex items-center justify-center ${
-                      shadowPosition === pos
-                        ? "border-purple-500 bg-purple-100"
-                        : "border-gray-300 hover:border-purple-300"
-                    }`}
+                    className={`w-8 h-8 rounded-sm border flex items-center justify-center transition-colors ${shadowPosition === pos
+                      ? "border-primary bg-primary/20 text-primary"
+                      : "border-black/10 dark:border-white/10 text-muted-foreground hover:border-black/30 dark:hover:border-white/30 hover:text-foreground"
+                      }`}
                   >
                     {pos === 4 ? (
-                      <svg width="4" height="4" viewBox="0 0 4 4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="2" cy="2" r="2" />
-                      </svg>
+                      <div className="w-1.5 h-1.5 bg-current rounded-sm"></div>
                     ) : (
-                      <svg width="8" height="8" viewBox="0 0 8 8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="10" height="10" viewBox="0 0 8 8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square">
                         {pos === 0 && <path d="M7 7L1 1M1 7V1H7" />}
                         {pos === 1 && <path d="M4 7V1M1 4L4 1L7 4" />}
                         {pos === 2 && <path d="M7 1L1 7M1 1H7V7" />}

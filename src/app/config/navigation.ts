@@ -4,7 +4,8 @@ export interface NavLinkItem {
 }
 
 export const mainNav: NavLinkItem[] = [
-  { label: "Mockup", path: "/" },
+  { label: "Home", path: "/" },
+  { label: "Mockup", path: "/mockup" },
   { label: "Frame", path: "/frame" },
   { label: "About", path: "/about" },
 ];

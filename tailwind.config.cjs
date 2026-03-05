@@ -1,10 +1,18 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ["class"],
   content: [
-    "./src/**/*.{html,js,ts,jsx,tsx}",
-    "app/**/*.{ts,tsx}",
-    "components/**/*.{ts,tsx}",
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
@@ -47,24 +55,18 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: [
-          "ui-sans-serif",
-          "system-ui",
-          "sans-serif",
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
-          '"Noto Color Emoji"',
-        ],
+        sans: ["JetBrains Mono", "monospace"],
+        display: ["Syne", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
       },
       keyframes: {
         "accordion-down": {
-          from: { height: "0" },
+          from: { height: 0 },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          to: { height: 0 },
         },
       },
       animation: {
@@ -72,8 +74,6 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
-    container: { center: true, padding: "2rem", screens: { "2xl": "1400px" } },
   },
-  plugins: [],
-  darkMode: ["class"],
-};
+  plugins: [require("tailwindcss-animate")],
+}

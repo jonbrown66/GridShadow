@@ -27,10 +27,10 @@ export const FramePage = (): JSX.Element => {
   });
 
   return (
-    <div className="flex flex-1 h-full min-h-0 overflow-hidden">
-      <aside className="w-80 lg:w-96 bg-white border-r border-gray-200 flex flex-col h-full min-h-0">
+    <div className="flex flex-1 h-full min-h-0 overflow-hidden bg-background">
+      <aside className="w-80 lg:w-96 bg-black/5 dark:bg-white/5 border-r border-black/10 dark:border-white/10 flex flex-col h-full min-h-0 relative font-mono text-sm">
         <ScrollArea className="flex-1 h-full overflow-y-auto">
-          <div className="p-6 space-y-6">
+          <div className="p-6 space-y-8">
             <LayoutSettings
               layoutRatio={frame.layoutRatio}
               setLayoutRatio={frame.setLayoutRatio}
@@ -74,7 +74,7 @@ export const FramePage = (): JSX.Element => {
           </div>
         </ScrollArea>
 
-        <Separator className="bg-gray-200" />
+        <Separator className="bg-black/10 dark:bg-white/10" />
         <DownloadSection
           downloadResolution={frame.downloadResolution}
           setDownloadResolution={frame.setDownloadResolution}

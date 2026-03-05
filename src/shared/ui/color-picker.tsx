@@ -125,41 +125,46 @@ export const ColorPicker = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="w-[320px] rounded-2xl bg-white p-6 shadow-2xl shadow-black/10 font-sans">
-        <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-900">Color Picker</h3>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-white dark:bg-black/80 backdrop-blur-sm">
+      <div className="w-[320px] rounded-none bg-background border border-black/10 dark:border-white/10 p-6 shadow-lg dark:shadow-2xl font-mono">
+        <div className="mb-6 flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-4">
+          <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">Color Engine</h3>
           <button
             onClick={onClose}
-            className="text-base text-gray-400 transition-colors hover:text-gray-700"
+            className="text-muted-foreground transition-colors hover:text-foreground font-bold"
             aria-label="Close color picker"
           >
-            ×
+            [X]
           </button>
         </div>
 
-        <div className="space-y-4 text-sm text-gray-600">
+        <div className="space-y-6 text-sm text-muted-foreground">
           <div
-            className="h-24 w-full rounded-lg border-2 border-dashed border-black/10"
-            style={{
+            className="h-24 w-full rounded-sm border border-black/20 dark:border-white/20 relative overflow-hidden"
+          >
+            <div className="absolute inset-0 technical-grid opacity-30 mix-blend-overlay"></div>
+            <div className="absolute inset-0" style={{
               backgroundColor: `${color}${Math.round(localOpacity * 2.55)
                 .toString(16)
                 .padStart(2, "0")}`,
-            }}
-          />
+            }}></div>
+          </div>
 
-          <div className="space-y-4">
+          <div className="space-y-5">
             <div className="space-y-2">
-              <label className="font-medium text-gray-700">
-                Hue: {hue}°
-              </label>
+              <div className="flex justify-between">
+                <label className="text-[10px] uppercase font-bold text-foreground tracking-widest">
+                  Hue
+                </label>
+                <span className="text-[10px]">{hue}°</span>
+              </div>
               <input
                 type="range"
                 min="0"
                 max="360"
                 value={hue}
                 onChange={handleHueChange}
-                className="h-2 w-full cursor-pointer appearance-none rounded-full"
+                className="h-1.5 w-full cursor-pointer appearance-none rounded-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-white"
                 style={{
                   background: `linear-gradient(to right,
                     hsl(0, 100%, 50%),
@@ -174,16 +179,19 @@ export const ColorPicker = ({
             </div>
 
             <div className="space-y-2">
-              <label className="font-medium text-gray-700">
-                Saturation: {saturation}%
-              </label>
+              <div className="flex justify-between">
+                <label className="text-[10px] uppercase font-bold text-foreground tracking-widest">
+                  Saturation
+                </label>
+                <span className="text-[10px]">{saturation}%</span>
+              </div>
               <input
                 type="range"
                 min="0"
                 max="100"
                 value={saturation}
                 onChange={handleSaturationChange}
-                className="h-2 w-full cursor-pointer appearance-none rounded-full"
+                className="h-1.5 w-full cursor-pointer appearance-none rounded-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-white"
                 style={{
                   background: `linear-gradient(to right,
                     hsl(${hue}, 0%, ${lightness}%),
@@ -193,16 +201,19 @@ export const ColorPicker = ({
             </div>
 
             <div className="space-y-2">
-              <label className="font-medium text-gray-700">
-                Lightness: {lightness}%
-              </label>
+              <div className="flex justify-between">
+                <label className="text-[10px] uppercase font-bold text-foreground tracking-widest">
+                  Lightness
+                </label>
+                <span className="text-[10px]">{lightness}%</span>
+              </div>
               <input
                 type="range"
                 min="0"
                 max="100"
                 value={lightness}
                 onChange={handleLightnessChange}
-                className="h-2 w-full cursor-pointer appearance-none rounded-full"
+                className="h-1.5 w-full cursor-pointer appearance-none rounded-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-white"
                 style={{
                   background: `linear-gradient(to right,
                     hsl(${hue}, ${saturation}%, 0%),
@@ -213,27 +224,30 @@ export const ColorPicker = ({
             </div>
 
             <div className="space-y-2">
-              <label className="font-medium text-gray-700">
-                Opacity: {localOpacity}%
-              </label>
+              <div className="flex justify-between">
+                <label className="text-[10px] uppercase font-bold text-foreground tracking-widest">
+                  Alpha
+                </label>
+                <span className="text-[10px]">{localOpacity}%</span>
+              </div>
               <input
                 type="range"
                 min="0"
                 max="100"
                 value={localOpacity}
                 onChange={handleOpacityChange}
-                className="h-2 w-full cursor-pointer appearance-none rounded-full bg-gray-200"
+                className="h-1.5 w-full cursor-pointer appearance-none rounded-none bg-black/20 dark:bg-white/20 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-white"
               />
             </div>
           </div>
 
-          <div className="flex items-center gap-2 pt-2 text-sm text-gray-600">
-            <span className="font-medium text-gray-700">Hex:</span>
+          <div className="flex items-center gap-3 pt-4 text-xs">
+            <span className="font-bold text-foreground uppercase tracking-widest text-[10px]">Hex.</span>
             <input
               type="text"
               value={color}
               readOnly
-              className="w-0 flex-1 truncate rounded-md border border-gray-200 px-3 py-2 font-mono text-sm text-gray-700"
+              className="flex-1 rounded-sm bg-white dark:bg-black/40 border border-black/10 dark:border-white/10 px-3 py-2 font-mono text-foreground text-xs uppercase focus:outline-none focus:border-primary"
             />
           </div>
         </div>

@@ -13,23 +13,25 @@ export const LayoutSettings: React.FC<LayoutSettingsProps> = ({
 }) => {
   return (
     <section>
-      <h2 className="mb-4 font-medium text-gray-500 text-xs tracking-wide uppercase">
-        LAYOUT
-      </h2>
-      <Card className="border border-gray-200">
+      <div className="flex items-center gap-2 mb-4">
+        <div className="w-1.5 h-1.5 bg-primary"></div>
+        <h2 className="font-bold text-foreground text-[10px] tracking-[0.2em] uppercase font-mono">
+          Canvas Ratio
+        </h2>
+      </div>
+      <Card className="border border-black/10 dark:border-white/10 bg-white dark:bg-black/40 rounded-sm">
         <CardContent className="p-4">
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-3 gap-2">
             {layoutOptions.map(({ key, label }) => (
               <div
                 key={key}
-                className={`flex flex-col items-center gap-2 cursor-pointer p-2 rounded-lg border-2 ${
-                  layoutRatio === key
-                    ? "border-purple-500 bg-purple-50"
-                    : "border-gray-200 hover:border-purple-300"
-                }`}
+                className={`flex flex-col items-center justify-center p-3 border rounded-sm cursor-pointer transition-all ${layoutRatio === key
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-black/10 dark:border-white/10 text-muted-foreground hover:border-black/30 dark:hover:border-white/30 hover:text-foreground"
+                  }`}
                 onClick={() => setLayoutRatio(key)}
               >
-                <div className="font-medium text-gray-700 text-sm">
+                <div className="font-bold text-xs tracking-wider uppercase font-mono">
                   {label}
                 </div>
               </div>
